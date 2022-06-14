@@ -2,37 +2,42 @@
 
 namespace KJSencha\Service;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Laminas\Cache\Storage\StorageInterface;
+use Laminas\Router\Http\RouteInterface;
+use KJSencha\Direct\Remoting\Api\Api;
+use Laminas\Http\PhpEnvironment\Request;
+use KJSencha\Direct\Remoting\Api\Factory\ApiBuilder;
 
-class ApiFactory implements FactoryInterface
+class ApiFactory
 {
+
     /**
      * {@inheritDoc}
      *
-     * @return \KJSencha\Direct\Remoting\Api\Api
+     * @return Api
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         /* @var $config array */
-        $config = $serviceLocator->get('Config');
-        /* @var $cache \Zend\Cache\Storage\StorageInterface */
-        $cache = $serviceLocator->get('kjsencha.cache');
-        /* @var $router \Zend\Mvc\Router\Http\RouteInterface */
-        $router = $serviceLocator->get('HttpRouter');
-        /* @var $api \KJSencha\Direct\Remoting\Api\Api */
+        $config = $container->get('Config');
+        /* @var $cache StorageInterface */
+        $cache = $container->get('kjsencha.cache');
+        /* @var $router RouteInterface */
+        $router = $container->get('HttpRouter');
+        /* @var $api Api */
         $api = $cache->getItem($config['kjsencha']['cache_key'], $success);
 
         if (!$success) {
-            /* @var $apiFactory \KJSencha\Direct\Remoting\Api\Factory\ApiBuilder */
-            $apiFactory = $serviceLocator->get('kjsencha.apibuilder');
-            /* @var $request \Zend\Http\PhpEnvironment\Request */
-            $request = $serviceLocator->get('Request');
+            /* @var $apiFactory ApiBuilder */
+            $apiFactory = $container->get('kjsencha.apibuilder');
+            /* @var $request Request */
+            $request = $container->get('Request');
             $api = $apiFactory->buildApi($config['kjsencha']['direct']);
             $url = $request->getBasePath() . $router->assemble(
-                array('action' => 'rpc'),
-                array('name'   => 'kjsencha-direct')
-            );
+                    array('action' => 'rpc'),
+                    array('name'   => 'kjsencha-direct')
+                );
             $api->setUrl($url);
             $cache->setItem($config['kjsencha']['cache_key'], $api);
         }

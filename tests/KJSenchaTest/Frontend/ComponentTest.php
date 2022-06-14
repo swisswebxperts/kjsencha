@@ -3,12 +3,12 @@
 namespace KJSenchaTest\Frontend;
 
 use KJSencha\Frontend\Component;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ComponentTest extends PHPUnit_Framework_TestCase
+class ComponentTest extends TestCase
 {
     /**
-     * @covers \KJSencha\Frontend\Component::__construct
+     * @covers Component::__construct
      */
     public function testSetComponentNameInConstructor()
     {

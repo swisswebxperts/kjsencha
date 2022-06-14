@@ -2,7 +2,7 @@
 
 namespace KJSencha;
 
-use Zend\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\AbstractPluginManager;
 
 return array(
     'factories' => array(

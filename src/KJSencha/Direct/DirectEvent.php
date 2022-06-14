@@ -2,7 +2,7 @@
 
 namespace KJSencha\Direct;
 
-use Zend\EventManager\Event;
+use Laminas\EventManager\Event;
 
 class DirectEvent extends Event
 {

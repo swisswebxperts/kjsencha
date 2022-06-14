@@ -2,17 +2,19 @@
 
 namespace KJSenchaTest\Direct\Remoting\Api\Factory;
 
+use KJSencha\Direct\Remoting\Api\Object\Action;
 use KJSenchaTest\Util\ServiceManagerFactory;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
+use KJSencha\Direct\Remoting\Api\Factory\ApiBuilder;
 
-class ApiBuilderTest extends PHPUnit_Framework_TestCase
+class ApiBuilderTest extends TestCase
 {
     /**
-     * @var \KJSencha\Direct\Remoting\Api\Factory\ApiBuilder
+     * @var ApiBuilder
      */
     protected $apiBuilder;
 
-    public function setUp()
+    public function setUp(): void
     {
         $sl = ServiceManagerFactory::getServiceManager();
 
@@ -20,11 +22,11 @@ class ApiBuilderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \KJSencha\Direct\Remoting\Api\Factory\ApiBuilder::buildMethod
+     * @covers ApiBuilder::buildMethod
      */
     public function testMethodIgnoresConstructor()
     {
-        /* @var $action \KJSencha\Direct\Remoting\Api\Object\Action */
+        /* @var $action Action */
         $action = $this->apiBuilder->buildAction('KJSenchaTestAsset\FooService');
         
         $this->assertTrue($action->hasMethod('getBar'));

@@ -2,10 +2,12 @@
 
 namespace KJSencha\Service;
 
-use Zend\Mvc\Service\ServiceManagerConfig;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\ArrayUtils;
+use Interop\Container\ContainerInterface;
+use Laminas\ModuleManager\ModuleManager;
+use Laminas\Mvc\Service\ServiceManagerConfig;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * ComponentManager Factory
@@ -17,26 +19,31 @@ use Zend\Stdlib\ArrayUtils;
 class ComponentManagerFactory implements FactoryInterface
 {
 
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+       $this->createService($container);
+    }
+
     /**
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface $container
      * @return \KJSencha\Service\ComponentManager
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function createService(ContainerInterface $container)
     {
-        $serviceConfig = $this->createConfig($serviceLocator);
+        $serviceConfig = $this->createConfig($container);
         $componentManager = new ComponentManager($serviceConfig);
-        $componentManager->addPeeringServiceManager($serviceLocator);
+        //$componentManager->addPeeringServiceManager($container);
         return $componentManager;
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface $container
      * @return ServiceManagerConfig
      */
-    public function createConfig(ServiceLocatorInterface $serviceLocator)
+    public function createConfig(ContainerInterface $container)
     {
         $config = array();
-        $moduleManager = $serviceLocator->get('ModuleManager');
+        $moduleManager = $container->get(ModuleManager::class);
 
         foreach ($moduleManager->getLoadedModules() as $module) {
             if (!is_callable(array($module, 'getComponentConfig'))

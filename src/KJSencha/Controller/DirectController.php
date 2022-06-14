@@ -7,11 +7,11 @@ use KJSencha\Direct\DirectManager;
 use KJSencha\Direct\Remoting\Api\Api;
 use KJSencha\Direct\Remoting\RPC;
 use KJSencha\Direct\DirectEvent;
-use Zend\Json\Json as JsonFormatter;
-use Zend\Mvc\Controller\AbstractController;
-use Zend\Mvc\MvcEvent;
-use Zend\Stdlib\ArrayUtils;
-use Zend\View\Model\JsonModel;
+use Laminas\Json\Json as JsonFormatter;
+use Laminas\Mvc\Controller\AbstractController;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\View\Model\JsonModel;
 
 /**
  * Direct Controller which executes RPC's

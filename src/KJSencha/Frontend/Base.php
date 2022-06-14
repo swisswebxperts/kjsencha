@@ -2,8 +2,8 @@
 
 namespace KJSencha\Frontend;
 
-use Zend\Stdlib\ArrayUtils;
-use Zend\Json\Json;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\Json\Json;
 use ArrayAccess;
 
 /**

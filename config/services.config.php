@@ -6,11 +6,9 @@ use KJSencha\Direct\Remoting\Api\Factory\ApiBuilder;
 use KJSencha\Direct\DirectManager;
 use KJSencha\Service\TestEchoService;
 use KJSencha\Frontend\Bootstrap;
-use Zend\Cache\StorageFactory;
-use Zend\Code\Annotation\AnnotationManager;
-use Zend\Code\Annotation\Parser\DoctrineAnnotationParser;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceManager;
+use Laminas\Code\Annotation\AnnotationManager;
+use Laminas\Code\Annotation\Parser\DoctrineAnnotationParser;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 return array(
     'factories' => array(
@@ -78,9 +76,9 @@ return array(
         /**
          * Direct manager, handles instantiation of requested services
          */
-        'kjsencha.direct.manager' => function(ServiceManager $sm) {
+        'kjsencha.direct.manager' => function(\Laminas\ServiceManager\ServiceManager $sm) {
             $directManager = new DirectManager();
-            $directManager->addPeeringServiceManager($sm);
+            //$directManager->addPeeringServiceManager($sm);
 
             return $directManager;
         },
@@ -91,6 +89,6 @@ return array(
          */
         'kjsencha.echo' => function() {
             return new TestEchoService('Hello ');
-        }
+        },
     )
 );

@@ -3,44 +3,50 @@
 namespace KJSenchaTest\Frontend;
 
 use KJSencha\Controller\DirectController;
+use KJSencha\Direct\DirectManager;
 use KJSenchaTest\Util\ServiceManagerFactory;
-use PHPUnit_Framework_TestCase;
-use Zend\Http\PhpEnvironment\Request;
-use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
-use Zend\Stdlib\Parameters;
+use Laminas\Http\Response;
+use Laminas\View\Model\JsonModel;
+use PHPUnit\Framework\TestCase;
+use Laminas\Http\PhpEnvironment\Request;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Console\Console;
+use Laminas\Router\RouteMatch;
+use Laminas\Stdlib\Parameters;
 
-class DirectControllerTest extends PHPUnit_Framework_TestCase
+use KJSencha\Direct\Remoting\Api\Api;
+
+class DirectControllerTest extends TestCase
 {
     /**
-     * @var \KJSencha\Controller\DirectController
+     * @var DirectController
      */
     protected $controller;
 
     /**
-     * @var \Zend\Http\PhpEnvironment\Request
+     * @var Request
      */
     protected $request;
 
     /**
-     * @var \Zend\Mvc\Router\RouteMatch
+     * @var RouteMatch
      */
     protected $routeMatch;
 
     /**
-     * @var \Zend\Mvc\MvcEvent
+     * @var MvcEvent
      */
     protected $event;
 
-    public function setUp()
+    public function setUp(): void
     {
         // Used by \KJSencha\Service\ApiFactory::createService
-        \Zend\Console\Console::overrideIsConsole(false);
+        Console::overrideIsConsole(false);
         $sl = ServiceManagerFactory::getServiceManager();
 
         /* @var $manager DirectManager */
         $manager = $sl->get('kjsencha.direct.manager');
-        /* @var $apiFactory \KJSencha\Direct\Remoting\Api\Api */
+        /* @var $apiFactory Api */
         $api = $sl->get('kjsencha.api');
 
         $this->controller = new DirectController($manager, $api);
@@ -52,9 +58,9 @@ class DirectControllerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \KJSencha\Controller\DirectController::isForm
-     * @covers \KJSencha\Controller\DirectController::getRPC
-     * @covers \KJSencha\Controller\DirectController::dispatchRPCS
+     * @covers DirectController::isForm
+     * @covers DirectController::getRPC
+     * @covers DirectController::dispatchRPCS
      */
     function testValidFormResponse()
     {
@@ -68,18 +74,18 @@ class DirectControllerTest extends PHPUnit_Framework_TestCase
         $result = $this->controller->dispatch($this->request);
 
         $this->assertTrue($this->controller->isForm());
-        $this->assertInstanceOf('Zend\View\Model\JsonModel', $result);
+        $this->assertInstanceOf(JsonModel::class, $result);
         $this->assertTrue(is_array($result->result));
         $this->assertEquals('rpc', $result->type);
         $this->assertTrue($result->result['success']);
     }
 
     /**
-     * @covers \KJSencha\Controller\DirectController::buildFormUploadResponse
-     * @covers \KJSencha\Controller\DirectController::isUpload
-     * @covers \KJSencha\Controller\DirectController::isForm
-     * @covers \KJSencha\Controller\DirectController::getRPC
-     * @covers \KJSencha\Controller\DirectController::dispatchRPCS
+     * @covers DirectController::buildFormUploadResponse
+     * @covers DirectController::isUpload
+     * @covers DirectController::isForm
+     * @covers DirectController::getRPC
+     * @covers DirectController::dispatchRPCS
      */
     function testValidUploadResponse()
     {
@@ -95,7 +101,7 @@ class DirectControllerTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->controller->isUpload());
         $this->assertTrue($this->controller->isForm());
-        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+        $this->assertInstanceOf(Response::class, $result);
 
 
         $expectedResult = array(
@@ -128,8 +134,8 @@ class DirectControllerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \KJSencha\Controller\DirectController::setDebugMode
-     * @covers \KJSencha\Controller\DirectController::isDebugMode
+     * @covers DirectController::setDebugMode
+     * @covers DirectController::isDebugMode
      */
     function testHiddenErrorResponseWhenDebugModeIsOff()
     {

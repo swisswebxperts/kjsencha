@@ -3,12 +3,12 @@
 namespace KJSenchaTest\Frontend;
 
 use KJSencha\Frontend\Base;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends TestCase
 {
     /**
-     * @covers \KJSencha\Frontend\Base::__construct
+     * @covers Base::__construct
      */
     public function testConstructorOverloading()
     {

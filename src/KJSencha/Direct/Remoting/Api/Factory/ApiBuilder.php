@@ -7,13 +7,13 @@ use KJSencha\Direct\Remoting\Api\Object\Action;
 use KJSencha\Direct\Remoting\Api\Object\Method;
 use InvalidArgumentException;
 
-use Zend\Code\Annotation\AnnotationManager;
-use Zend\ServiceManager\ServiceManager;
-use Zend\Code\Scanner\DirectoryScanner;
-use Zend\Code\Scanner\FileScanner;
-use Zend\Code\Scanner\MethodScanner;
-use Zend\Code\Reflection\ClassReflection;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Code\Annotation\AnnotationManager;
+use Laminas\Code\Reflection\ClassReflection;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Code\Scanner\DirectoryScanner;
+use Laminas\Code\Scanner\FileScanner;
+use Laminas\Code\Scanner\MethodScanner;
+use Laminas\Stdlib\ArrayUtils;
 
 /**
  * Module Factory
@@ -89,7 +89,7 @@ class ApiBuilder
             $jsNamespace = rtrim(str_replace('\\', '.', $module['namespace']), '.') . '.';
             $directoryScanner = new DirectoryScanner($module['directory']);
 
-            /* @var $class \Zend\Code\Scanner\DerivedClassScanner */
+            /* @var $class \Laminas\Code\Scanner\DerivedClassScanner */
             foreach ($directoryScanner->getClasses(true) as $class) {
                 // now building the service name as exposed client-side
                 $className = $class->getName();

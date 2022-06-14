@@ -1,36 +1,56 @@
 {
-    "name": "rovak/kj-sencha",
-    "description": "Ext-JS / Sencha Touch RPC Intergration Module for Zend Framework 2",
+    "name": "alysongustavo/kj-sencha",
+    "description": "Ext-JS / Sencha Touch RPC Intergration Module for Mezzio Framework",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "zf2",
+        "lamminas",
         "sencha",
         "extjs"
     ],
-    "homepage": "https://github.com/Rovak/KJSencha",
+    "homepage": "https://github.com/alysongustavo/KJSencha",
     "authors": [
         {
-            "name": "Roy van Kaathoven",
-            "email": "ik@royvankaathoven.nl",
-            "homepage": "http://www.rovak.pro/"
+            "name": "Alyson Rodrigo",
+            "email": "g.dasilva@hotmail.com",
+            "homepage": "https://www.alysongustavoti.com.br"
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "zendframework/zendframework": "2.*",
-        "doctrine/common": ">=2.3-dev,<2.5-dev",
-        "rwoverdijk/assetmanager": "1.*"
+        "php": ">=7.1",
+        "laminas/laminas-mvc": "^3.1.1",
+        "rwoverdijk/assetmanager": "^3.0.0",
+        "ext-json": "*",
+        "laminas/laminas-router": "^3.0.2",
+        "laminas/laminas-eventmanager": "^3.4",
+        "laminas/laminas-cache-storage-adapter-memory": "2.1.x-dev",
+        "laminas/laminas-code": "3.4.x",
+        "symfony/console": "5.4.x-dev",
+        "laminas/laminas-console": "2.9.x-dev",
+        "doctrine/common": "2.1.x"
     },
     "autoload": {
-        "psr-0": {
-            "KJSencha\\": "src/"
+        "psr-4": {
+            "KJSencha\\": "src/KJSencha/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "KJSenchaTest\\": "test/KJSenchaTest/"
         }
     },
     "extra": {
         "branch-alias" : {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "1.0.0"
         }
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "allow-plugins": {
+            "laminas/laminas-dependency-plugin": true
+        }
+    },
+    "require-dev": {
+        "laminas/laminas-test": "4.1.x-dev"
     }
-
 }

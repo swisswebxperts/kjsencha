@@ -5,10 +5,10 @@ namespace KJSencha\Service;
 use Exception;
 use KJSencha\Frontend\Base;
 use UnexpectedValueException;
-use Zend\EventManager\EventManagerAwareInterface;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\EventManager\EventManagerAwareInterface;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\ConfigInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Component Manager

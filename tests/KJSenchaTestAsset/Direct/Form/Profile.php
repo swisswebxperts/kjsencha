@@ -31,11 +31,11 @@ class Profile
      */
     public function updateBasicInfo($values)
     {
-        return array(
-            'errors' => array(
+        return [
+            'errors' => [
                 'name' => 'Wrong info!'
-            )
-        );
+            ]
+        ];
     }
 
     /**

@@ -5,9 +5,8 @@ namespace KJSencha\Controller;
 use Exception;
 use KJSencha\Frontend as Ext;
 use KJSencha\Service\ComponentManager;
-use Zend\Http\Response;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Http\Response;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 /**
  * Handles component creation requests which are grabbed from the global

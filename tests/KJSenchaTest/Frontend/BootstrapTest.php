@@ -3,18 +3,18 @@
 namespace KJSenchaTest\Frontend;
 
 use KJSencha\Frontend\Bootstrap;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Marco Pivetta <ocramius@gmail.com>
  */ 
-class BootstrapTest extends PHPUnit_Framework_TestCase
+class BootstrapTest extends TestCase
 {
     /**
-     * @covers \KJSencha\Frontend\Bootstrap::__construct
-     * @covers \KJSencha\Frontend\Bootstrap::getVariables
-     * @covers \KJSencha\Frontend\Bootstrap::setVariables
-     * @covers \KJSencha\Frontend\Bootstrap::addVariables
+     * @covers Bootstrap::__construct
+     * @covers Bootstrap::getVariables
+     * @covers Bootstrap::setVariables
+     * @covers Bootstrap::addVariables
      */
     public function testSetGetAddVariables()
     {
@@ -39,9 +39,9 @@ class BootstrapTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \KJSencha\Frontend\Bootstrap::__construct
-     * @covers \KJSencha\Frontend\Bootstrap::getVariables
-     * @covers \KJSencha\Frontend\Bootstrap::addVariables
+     * @covers Bootstrap::__construct
+     * @covers Bootstrap::getVariables
+     * @covers Bootstrap::addVariables
      */
     public function testAddVariablesMergesVariables()
     {

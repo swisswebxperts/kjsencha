@@ -4,8 +4,8 @@ namespace KJSencha\Frontend;
 
 use ArrayObject;
 use KJSencha\Direct\Remoting\Api\Api;
-use Zend\Stdlib\ArrayUtils;
-use Zend\View\Model\ViewModel;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\View\Model\ViewModel;
 
 /**
  * Ext JS Bootstrap

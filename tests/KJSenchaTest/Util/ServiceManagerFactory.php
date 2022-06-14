@@ -2,8 +2,12 @@
 
 namespace KJSenchaTest\Util;
 
-use Zend\ServiceManager\ServiceManager;
-use Zend\Mvc\Service\ServiceManagerConfig;
+use Laminas\ModuleManager\Listener\ServiceListener;
+use Laminas\ModuleManager\ModuleManager;
+use Laminas\Mvc\Service\ServiceListenerFactory;
+use Laminas\ServiceManager\Config;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Mvc\Service\ServiceManagerConfig;
 
 /**
  * Utility used to retrieve a freshly bootstrapped application's service manager
@@ -30,15 +34,18 @@ class ServiceManagerFactory
      */
     public static function getServiceManager()
     {
-        $serviceManager = new ServiceManager(new ServiceManagerConfig(
-            isset(static::$config['service_manager']) ? static::$config['service_manager'] : array()
-        ));
-        $serviceManager->setService('ApplicationConfig', static::$config);
-        $serviceManager->setFactory('ServiceListener', 'Zend\Mvc\Service\ServiceListenerFactory');
 
-        /** @var $moduleManager \Zend\ModuleManager\ModuleManager */
-        $moduleManager = $serviceManager->get('ModuleManager');
-        $moduleManager->loadModules();
+        $config = include __DIR__.'/../../../config/services.config.php';
+
+        $serviceManagerConfig = new Config($config);
+        $serviceManager = new ServiceManager();
+        $serviceManager->setAllowOverride(true);
+        $serviceManagerConfig->configureServiceManager($serviceManager);
+        $serviceManager->setService('config', $config);
+
+        /** @var $moduleManager ModuleManager */
+        //$moduleManager = $serviceManager->get(ModuleManager::class);
+        // $moduleManager->loadModules();
 
         return $serviceManager;
     }

@@ -2,16 +2,12 @@
 
 namespace KJSencha;
 
-use Zend\Loader\AutoloaderFactory;
-use Zend\Loader\StandardAutoloader;
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\ControllerProviderInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
-use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\Feature\ControllerProviderInterface;
+use Laminas\ModuleManager\Feature\ServiceProviderInterface;
+use Laminas\ModuleManager\Feature\ViewHelperProviderInterface;
 
 class Module implements
-    AutoloaderProviderInterface,
     ConfigProviderInterface,
     ServiceProviderInterface,
     ControllerProviderInterface,
@@ -20,6 +16,9 @@ class Module implements
     /**
      * {@inheritDoc}
      */
+
+    /*
+     *
     public function getAutoloaderConfig()
     {
         return array(
@@ -30,6 +29,7 @@ class Module implements
             ),
         );
     }
+    */
 
     /**
      * {@inheritDoc}

@@ -2,9 +2,9 @@
 
 namespace KJSencha\View\Helper;
 
-use Zend\View\Helper\AbstractHelper;
-use Zend\View\Helper\HeadLink;
-use Zend\View\Helper\HeadScript;
+use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\Helper\HeadLink;
+use Laminas\View\Helper\HeadScript;
 
 /**
  * Ext JS view helper - aids in including ExtJs CSS/JS files

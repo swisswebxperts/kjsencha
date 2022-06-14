@@ -2,7 +2,7 @@
 
 namespace KJSencha\Direct;
 
-use Zend\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\AbstractPluginManager;
 
 /**
  * Manages the creation of Direct classes

@@ -2,7 +2,7 @@
 
 namespace KJSencha\View\Model;
 
-use Zend\View\Model\JsonModel;
+use Laminas\View\Model\JsonModel;
 
 /**
  * Ext JS resul
