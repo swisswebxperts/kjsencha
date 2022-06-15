@@ -25,7 +25,6 @@
         "laminas/laminas-eventmanager": "^3.4",
         "laminas/laminas-cache-storage-adapter-memory": "2.1.x-dev",
         "laminas/laminas-code": "3.4.x",
-        "symfony/console": "5.4.x-dev",
         "laminas/laminas-console": "2.9.x-dev",
         "doctrine/common": "2.1.x"
     },
