@@ -51,5 +51,6 @@
     },
     "require-dev": {
         "laminas/laminas-test": "4.1.x-dev"
-    }
+    },
+    "minimum-stability": "dev"
 }
