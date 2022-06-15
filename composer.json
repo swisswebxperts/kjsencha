@@ -38,11 +38,6 @@
             "KJSenchaTest\\": "test/KJSenchaTest/"
         }
     },
-    "extra": {
-        "branch-alias" : {
-            "dev-master": "1.0.0"
-        }
-    },
     "minimum-stability": "dev",
     "config": {
         "allow-plugins": {
@@ -51,6 +46,5 @@
     },
     "require-dev": {
         "laminas/laminas-test": "4.1.x-dev"
-    },
-    "minimum-stability": "dev"
+    }
 }
