@@ -1,9 +1,23 @@
 <?php
 
-use KJSencha\Frontend as Ext;
+namespace KJSencha;
+
+use KJSencha\Controller\Factory\KjSenchaDataFactory;
+use KJSencha\Controller\Factory\KjSenchaDirectFactory;
+use KJSencha\Service\ApiFactory;
+use KJSencha\Service\ComponentManagerFactory;
+use KJSencha\Service\Factory\AnnotationManagerFactory;
+use KJSencha\Service\Factory\ApiBuilderFactory;
+use KJSencha\Service\Factory\DirectManagerFactory;
+use KJSencha\Service\Factory\ExtJsViewHelperFactory;
+use KJSencha\Service\Factory\KjSenchaBootstrapFactory;
+use KJSencha\Service\Factory\KjSenchaCacheFactory;
+use KJSencha\Service\Factory\KjSenchaDirectApiFactory;
+use KJSencha\Service\Factory\KjSenchaEchoFactory;
+use KJSencha\Service\Factory\kjSenchaLoaderConfigFactory;
+use KJSencha\Service\Factory\kjSenchaVariablesFactory;
 
 return array(
-
     /**
      * Ext JS Configuration
      */
@@ -59,7 +73,6 @@ return array(
          */
         'debug_mode' => false,
     ),
-
     'view_manager' => array(
         'template_path_stack' => array(
             __DIR__ . '/../view/'
@@ -94,7 +107,6 @@ return array(
             ),
         ),
     ),
-
     /**
      * AssetManager config to allow serving files from the `public` dir in this module
      */
@@ -104,8 +116,5 @@ return array(
                 'KJSencha' => __DIR__ . '/../public',
             ),
         ),
-    ),
-    'service_manager' => [
-
-    ]
+    )
 );

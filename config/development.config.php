@@ -2,6 +2,8 @@
 
 namespace KJSencha;
 
+use KJSencha\Controller\Factory\KjSenchaDataFactory;
+use KJSencha\Controller\Factory\KjSenchaDirectFactory;
 use KJSencha\Service\ApiFactory;
 use KJSencha\Service\ComponentManagerFactory;
 use KJSencha\Service\Factory\AnnotationManagerFactory;
@@ -16,6 +18,9 @@ use KJSencha\Service\Factory\kjSenchaVariablesFactory;
 
 return [
     "factories" => [
+        'kjsencha_direct' => KjSenchaDirectFactory::class,
+        'kjsencha_data' => KjSenchaDataFactory::class,
+
         /**
          * Produces a \KJSencha\Direct\Remoting\Api instance consumed by
          * the RPC services

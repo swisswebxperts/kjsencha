@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "KJSencha\\": "src/KJSencha/"
+            "KJSencha\\": "src/"
         }
     },
     "autoload-dev": {

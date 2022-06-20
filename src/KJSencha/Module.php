@@ -13,28 +13,11 @@ class Module implements
     ControllerProviderInterface,
     ViewHelperProviderInterface
 {
-    /**
-     * {@inheritDoc}
-     */
-
-    /*
-     *
-    public function getAutoloaderConfig()
-    {
-        return array(
-            AutoloaderFactory::STANDARD_AUTOLOADER => array(
-                StandardAutoloader::LOAD_NS => array(
-                    __NAMESPACE__ => __DIR__,
-                ),
-            ),
-        );
-    }
-    */
 
     /**
      * {@inheritDoc}
      */
-    public function getConfig()
+    public function getConfig(): array
     {
         return require __DIR__ . '/../../config/module.config.php';
     }

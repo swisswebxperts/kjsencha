@@ -2,12 +2,12 @@
 
 namespace KJSenchaTest\Util;
 
-use Laminas\ModuleManager\Listener\ServiceListener;
-use Laminas\ModuleManager\ModuleManager;
+use Laminas\ModuleManager\Listener\ServiceListenerInterface;
+use Laminas\ModuleManager\ModuleManagerInterface;
+use Laminas\Mvc\ApplicationInterface;
 use Laminas\Mvc\Service\ServiceListenerFactory;
-use Laminas\ServiceManager\Config;
-use Laminas\ServiceManager\ServiceManager;
 use Laminas\Mvc\Service\ServiceManagerConfig;
+use Laminas\ServiceManager\ServiceManager;
 
 /**
  * Utility used to retrieve a freshly bootstrapped application's service manager
@@ -35,17 +35,21 @@ class ServiceManagerFactory
     public static function getServiceManager()
     {
 
-        $config = include __DIR__.'/../../../config/services.config.php';
+        $array = isset(static::$config['service_manager']) ? static::$config['service_manager'] : [];
 
-        $serviceManagerConfig = new Config($config);
-        $serviceManager = new ServiceManager();
-        $serviceManager->setAllowOverride(true);
-        $serviceManagerConfig->configureServiceManager($serviceManager);
-        $serviceManager->setService('config', $config);
+        $serviceManagerConfig = new ServiceManagerConfig($array);
 
-        /** @var $moduleManager ModuleManager */
-        //$moduleManager = $serviceManager->get(ModuleManager::class);
-        // $moduleManager->loadModules();
+        $serviceManager = new ServiceManager($array);
+        $serviceManager->setService(ApplicationInterface::class, static::$config);
+        $serviceManager->setFactory(ServiceListenerInterface::class, ServiceListenerFactory::class);
+
+        //var_dump($serviceManager->getServiceLocator()->get(ModuleManagerInterface::class));die();
+        //$serviceManagerConfig->configureServiceManager($serviceManager);
+        //$serviceManagerConfig->configureServiceManager($serviceManager);
+        //$serviceManager->setService('config', $serviceManagerConfig);
+
+        $moduleManager = $serviceManager->getServiceLocator()->get(ModuleManagerInterface::class);
+        $moduleManager->loadModules();
 
         return $serviceManager;
     }

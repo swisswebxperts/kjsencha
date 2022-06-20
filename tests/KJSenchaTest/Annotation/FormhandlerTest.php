@@ -23,7 +23,7 @@ class FormhandlerTest extends TestCase
 
         $sl = ServiceManagerFactory::getServiceManager();
 
-        $this->apiBuilder = $sl->get('kjsencha.apibuilder');
+        $this->apiBuilder = $sl-> get('kjsencha.apibuilder');
     }
 
     /**
