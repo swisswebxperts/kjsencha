@@ -34,8 +34,6 @@ class FormhandlerTest extends TestCase
         /* @var $action Action */
         $action = $this->apiBuilder->buildAction(Profile::class);
 
-        var_dump($action);die();
-
         $this->assertTrue($action->hasMethod('updateBasicInfo'));
         $this->assertTrue($action->getMethod('updateBasicInfo')->getOption('formHandler'));
     }

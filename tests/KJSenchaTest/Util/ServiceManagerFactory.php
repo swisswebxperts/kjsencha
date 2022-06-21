@@ -43,11 +43,6 @@ class ServiceManagerFactory
         $serviceManager->setService(ApplicationInterface::class, static::$config);
         $serviceManager->setFactory(ServiceListenerInterface::class, ServiceListenerFactory::class);
 
-        //var_dump($serviceManager->getServiceLocator()->get(ModuleManagerInterface::class));die();
-        //$serviceManagerConfig->configureServiceManager($serviceManager);
-        //$serviceManagerConfig->configureServiceManager($serviceManager);
-        //$serviceManager->setService('config', $serviceManagerConfig);
-
         $moduleManager = $serviceManager->getServiceLocator()->get(ModuleManagerInterface::class);
         $moduleManager->loadModules();
 
