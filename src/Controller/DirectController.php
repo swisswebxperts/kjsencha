@@ -22,7 +22,7 @@ use Laminas\View\Model\JsonModel;
 class DirectController extends AbstractController
 {
     /**
-     * @var \KJSencha\Direct\DirectManager
+     * @var DirectManager
      */
     protected $manager;
     /**

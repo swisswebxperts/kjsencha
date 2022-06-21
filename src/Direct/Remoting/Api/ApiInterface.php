@@ -2,6 +2,9 @@
 
 namespace KJSencha\Direct\Remoting\Api;
 
+use KJSencha\Direct\Remoting\Api\Object\Action;
+use KJSencha\Frontend\Direct\RemotingProvider;
+
 interface ApiInterface
 {
 
@@ -19,14 +22,14 @@ interface ApiInterface
      * Retrieves a single Action by its name
      *
      * @param  string                                      $name
-     * @return \KJSencha\Direct\Remoting\Api\Object\Action
+     * @return Action
      */
     public function getAction($name);
 
     /**
      * Retrieves all Actions in this API
      *
-     * @return \KJSencha\Direct\Remoting\Api\Object\Action[]
+     * @return Action[]
      */
     public function getActions();
 
@@ -46,7 +49,7 @@ interface ApiInterface
     public function toApiArray();
 
     /**
-     * @return \KJSencha\Frontend\Direct\RemotingProvider
+     * @return RemotingProvider
      */
     public function buildRemotingProvider();
 }

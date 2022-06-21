@@ -13,7 +13,7 @@ use Psr\Container\ContainerInterface;
 class AnnotationManagerFactory implements FactoryInterface
 {
 
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): ?DoctrineAnnotationParser
     {
         $doctrineParser = new DoctrineAnnotationParser();
         $doctrineParser->registerAnnotation(  Remotable::class);

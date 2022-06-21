@@ -1,14 +1,14 @@
 <?php
 
-namespace KJSencha\Service;
+namespace KJSencha\Service\Factory;
 
 use Interop\Container\ContainerInterface;
+use KJSencha\Direct\Remoting\Api\Api;
+use KJSencha\Direct\Remoting\Api\Builder\ApiBuilder;
 use Laminas\Cache\Storage\StorageInterface;
 use Laminas\Config\Config;
-use Laminas\Router\Http\RouteInterface;
-use KJSencha\Direct\Remoting\Api\Api;
 use Laminas\Http\PhpEnvironment\Request;
-use KJSencha\Direct\Remoting\Api\Factory\ApiBuilder;
+use Laminas\Router\Http\RouteInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class ApiFactory implements FactoryInterface

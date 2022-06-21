@@ -2,7 +2,7 @@
 
 namespace KJSencha\Direct\Remoting;
 
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Stdlib\ArrayUtils;
 
 /**
  * RPC Object

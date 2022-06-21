@@ -35,7 +35,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "KJSenchaTest\\": "test/KJSenchaTest/"
+            "KJSenchaTest\\": "test/KJSenchaTest/",
+            "KJSenchaTestAsset\\": "test/KJSenchaTestAsset/"
         }
     },
     "minimum-stability": "dev",

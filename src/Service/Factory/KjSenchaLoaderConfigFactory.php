@@ -4,20 +4,17 @@ namespace KJSencha\Service\Factory;
 
 use KJSencha\View\Helper\LoaderConfig;
 use Laminas\ServiceManager\AbstractPluginManager;
-use Laminas\ServiceManager\Exception\ServiceNotCreatedException;
-use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 
 use Laminas\View\Helper\BasePath;
 use Laminas\View\Helper\HeadScript;
 use KJSencha\Frontend\Bootstrap;
 
-class kjSenchaLoaderConfigFactory implements FactoryInterface
+class KjSenchaLoaderConfigFactory implements FactoryInterface
 {
 
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): ?LoaderConfig
     {
 
         $pluginManager = $container->get(AbstractPluginManager::class);

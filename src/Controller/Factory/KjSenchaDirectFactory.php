@@ -4,7 +4,6 @@ namespace KJSencha\Controller\Factory;
 
 use KJSencha\Controller\DirectController;
 use Laminas\Config\Config;
-use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 

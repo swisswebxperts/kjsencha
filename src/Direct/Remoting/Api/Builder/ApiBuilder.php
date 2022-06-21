@@ -1,18 +1,18 @@
 <?php
 
-namespace KJSencha\Direct\Remoting\Api\Factory;
+namespace KJSencha\Direct\Remoting\Api\Builder;
 
+use InvalidArgumentException;
 use KJSencha\Direct\Remoting\Api\Api;
 use KJSencha\Direct\Remoting\Api\Object\Action;
 use KJSencha\Direct\Remoting\Api\Object\Method;
-use InvalidArgumentException;
-
+use Laminas\Code\Scanner\DerivedClassScanner;
 use Laminas\Code\Annotation\AnnotationManager;
 use Laminas\Code\Reflection\ClassReflection;
-use Laminas\ServiceManager\ServiceManager;
 use Laminas\Code\Scanner\DirectoryScanner;
 use Laminas\Code\Scanner\FileScanner;
 use Laminas\Code\Scanner\MethodScanner;
+use Laminas\ServiceManager\ServiceManager;
 use Laminas\Stdlib\ArrayUtils;
 
 /**
@@ -55,7 +55,7 @@ class ApiBuilder
 
         $api = new Api();
 
-        /* @var $actions \KJSencha\Direct\Remoting\Api\Object\Action[] */
+        /* @var $actions Action[] */
         foreach ($actions as $name => $action) {
             $api->addAction($name, $action);
         }
@@ -89,7 +89,7 @@ class ApiBuilder
             $jsNamespace = rtrim(str_replace('\\', '.', $module['namespace']), '.') . '.';
             $directoryScanner = new DirectoryScanner($module['directory']);
 
-            /* @var $class \Laminas\Code\Scanner\DerivedClassScanner */
+            /* @var $class DerivedClassScanner */
             foreach ($directoryScanner->getClasses(true) as $class) {
                 // now building the service name as exposed client-side
                 $className = $class->getName();
@@ -133,7 +133,6 @@ class ApiBuilder
         $api = array();
 
         foreach ($services as $name => $serviceName) {
-            // @todo validate service name?
             $service = $this->serviceManager->get($serviceName);
             $action = $this->buildAction(get_class($service));
             $action->setName($name);

@@ -7,6 +7,7 @@ use KJSencha\Frontend as Ext;
 use KJSencha\Service\ComponentManager;
 use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Stdlib\ArrayUtils;
 
 /**
  * Handles component creation requests which are grabbed from the global
