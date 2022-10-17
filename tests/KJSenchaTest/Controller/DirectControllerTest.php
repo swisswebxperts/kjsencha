@@ -1,6 +1,6 @@
 <?php
 
-namespace KJSenchaTest\Frontend;
+namespace KJSenchaTest\Controller;
 
 use KJSencha\Controller\DirectController;
 use KJSencha\Direct\DirectManager;
@@ -10,7 +10,6 @@ use Laminas\View\Model\JsonModel;
 use PHPUnit\Framework\TestCase;
 use Laminas\Http\PhpEnvironment\Request;
 use Laminas\Mvc\MvcEvent;
-use Laminas\Console\Console;
 use Laminas\Router\RouteMatch;
 use Laminas\Stdlib\Parameters;
 
@@ -41,7 +40,6 @@ class DirectControllerTest extends TestCase
     public function setUp(): void
     {
         // Used by \KJSencha\Service\ApiFactory::createService
-        Console::overrideIsConsole(false);
         $sl = ServiceManagerFactory::getServiceManager();
 
         /* @var $manager DirectManager */

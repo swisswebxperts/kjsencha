@@ -3,7 +3,7 @@
 namespace KJSenchaTest\Annotation;
 
 use KJSencha\Direct\Remoting\Api\Api;
-use KJSencha\Direct\Remoting\Api\Factory\ApiBuilder;
+use KJSencha\Direct\Remoting\Api\Builder\ApiBuilder;
 use KJSenchaTest\Util\ServiceManagerFactory;
 use KJSenchaTestAsset\Direct\Form\Profile;
 use PHPUnit\Framework\TestCase;
@@ -18,12 +18,13 @@ class FormhandlerTest extends TestCase
      */
     protected $apiBuilder;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
 
         $sl = ServiceManagerFactory::getServiceManager();
 
-        $this->apiBuilder = $sl-> get('kjsencha.apibuilder');
+        $this->apiBuilder = $sl->get('kjsencha.apibuilder');
+
     }
 
     /**

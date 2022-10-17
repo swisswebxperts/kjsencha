@@ -2,10 +2,11 @@
 
 namespace KJSenchaTest\Direct\Remoting\Api\Factory;
 
+use KJSencha\Direct\Remoting\Api\Builder\ApiBuilder;
 use KJSencha\Direct\Remoting\Api\Object\Action;
+use KJSencha\Util\DeveloperDebug;
 use KJSenchaTest\Util\ServiceManagerFactory;
 use PHPUnit\Framework\TestCase;
-use KJSencha\Direct\Remoting\Api\Factory\ApiBuilder;
 
 class ApiBuilderTest extends TestCase
 {
@@ -17,6 +18,8 @@ class ApiBuilderTest extends TestCase
     public function setUp(): void
     {
         $sl = ServiceManagerFactory::getServiceManager();
+
+        DeveloperDebug::dd($sl);
 
         $this->apiBuilder = $sl->get('kjsencha.apibuilder');
     }
