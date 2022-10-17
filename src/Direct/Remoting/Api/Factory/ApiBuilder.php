@@ -1,6 +1,6 @@
 <?php
 
-namespace KJSencha\Direct\Remoting\Api\Builder;
+namespace KJSencha\Direct\Remoting\Api\Factory;
 
 use InvalidArgumentException;
 use KJSencha\Direct\Remoting\Api\Api;
@@ -55,7 +55,7 @@ class ApiBuilder
 
         $api = new Api();
 
-        /* @var $actions Action[] */
+        /* @var $actions \KJSencha\Direct\Remoting\Api\Object\Action[] */
         foreach ($actions as $name => $action) {
             $api->addAction($name, $action);
         }
@@ -89,7 +89,7 @@ class ApiBuilder
             $jsNamespace = rtrim(str_replace('\\', '.', $module['namespace']), '.') . '.';
             $directoryScanner = new DirectoryScanner($module['directory']);
 
-            /* @var $class DerivedClassScanner */
+            /* @var $class \Laminas\Code\Scanner\DerivedClassScanner */
             foreach ($directoryScanner->getClasses(true) as $class) {
                 // now building the service name as exposed client-side
                 $className = $class->getName();
@@ -133,6 +133,7 @@ class ApiBuilder
         $api = array();
 
         foreach ($services as $name => $serviceName) {
+            // @todo validate service name?
             $service = $this->serviceManager->get($serviceName);
             $action = $this->buildAction(get_class($service));
             $action->setName($name);

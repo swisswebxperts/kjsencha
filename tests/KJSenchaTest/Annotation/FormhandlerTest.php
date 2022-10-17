@@ -3,7 +3,7 @@
 namespace KJSenchaTest\Annotation;
 
 use KJSencha\Direct\Remoting\Api\Api;
-use KJSencha\Direct\Remoting\Api\Builder\ApiBuilder;
+use KJSencha\Direct\Remoting\Api\Factory\ApiBuilder;
 use KJSenchaTest\Util\ServiceManagerFactory;
 use KJSenchaTestAsset\Direct\Form\Profile;
 use PHPUnit\Framework\TestCase;

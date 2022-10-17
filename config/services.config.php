@@ -3,10 +3,14 @@
 namespace KJSencha;
 
 use KJSencha\Direct\DirectManager;
-use KJSencha\Direct\Remoting\Api\Builder\ApiBuilder;
+use KJSencha\Direct\Remoting\Api\Factory\ApiBuilder;
+use KJSencha\Service\ComponentManagerFactory;
+use KJSencha\Service\Factory\ApiFactory;
 use KJSencha\Service\TestEchoService;
 use KJSencha\Frontend\Bootstrap;
 use Laminas\Cache\Service\StorageAdapterFactoryFactory;
+use Laminas\Cache\Service\StorageAdapterFactoryInterface;
+use Laminas\Cache\Service\StorageCacheFactory;
 use Laminas\Code\Annotation\AnnotationManager;
 use Laminas\Code\Annotation\Parser\DoctrineAnnotationParser;
 use Laminas\ServiceManager\ServiceLocatorInterface;
@@ -19,8 +23,8 @@ return array(
          * Produces a \KJSencha\Direct\Remoting\Api instance consumed by
          * the RPC services
          */
-        'kjsencha.api'              => 'KJSencha\Service\ApiFactory',
-        'kjsencha.componentmanager' => 'KJSencha\Service\ComponentManagerFactory',
+        'kjsencha.api'              => ApiFactory::class,
+        'kjsencha.componentmanager' => ComponentManagerFactory::class,
 
         /**
          * Annotation manager used to discover features available for the RPC services
@@ -53,7 +57,9 @@ return array(
          */
         'kjsencha.cache' => function(ServiceLocatorInterface $sl) {
             $config = $sl->get('Config');
-            $storage = StorageAdapterFactoryFactory::factory($config['kjsencha']['cache']);
+            /** @var  $storage StorageAdapterFactoryInterface */
+            $storage =  $sl->get(StorageAdapterFactoryInterface::class);
+            $storage->createFromArrayConfiguration($config['kjsencha']['cache']);
             return $storage;
         },
         /**

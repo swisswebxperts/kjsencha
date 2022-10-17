@@ -2,7 +2,7 @@
 
 namespace KJSenchaTest\Direct\Remoting\Api\Factory;
 
-use KJSencha\Direct\Remoting\Api\Builder\ApiBuilder;
+use KJSencha\Direct\Remoting\Api\Factory\ApiBuilder;
 use KJSencha\Direct\Remoting\Api\Object\Action;
 use KJSencha\Util\DeveloperDebug;
 use KJSenchaTest\Util\ServiceManagerFactory;

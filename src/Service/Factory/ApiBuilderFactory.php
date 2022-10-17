@@ -3,7 +3,7 @@
 namespace KJSencha\Service\Factory;
 
 use KJSencha\Direct\DirectManager;
-use KJSencha\Direct\Remoting\Api\Builder\ApiBuilder;
+use KJSencha\Direct\Remoting\Api\Factory\ApiBuilder;
 use Laminas\Code\Annotation\AnnotationManager;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
