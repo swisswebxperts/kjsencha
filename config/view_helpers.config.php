@@ -23,15 +23,15 @@ return array(
             $config = $pluginManager->getServiceLocator()->get("Config");
 
             /* @var $headLink HeadLink */
-            $headLink = $pluginManager->get('headLink');
+            $headLink = $pluginManager->get(HeadLink::class);
             /* @var $headScript HeadScript */
-            $headScript = $pluginManager->get('headScript');
+            $headScript = $pluginManager->get(HeadScript::class);
 
             return new ExtJS($config['kjsencha'], $headLink, $headScript);
         },
         'kjSenchaVariables' => function($pluginManager) {
             /* @var $headScript HeadScript */
-            $headScript = $pluginManager->get('headScript');
+            $headScript = $pluginManager->get(HeadScript::class);
             /* @var $bootstrap Bootstrap */
             $bootstrap = $pluginManager->getServiceLocator()->get('kjsencha.bootstrap');
 
@@ -39,18 +39,18 @@ return array(
         },
         'kjSenchaLoaderConfig' => function($pluginManager) {
             /* @var $basePath BasePath */
-            $basePath = $pluginManager->get('basePath');
+            $basePath = $pluginManager->get(BasePath::class);
             /* @var $headScript HeadScript */
-            $headScript = $pluginManager->get('headScript');
+            $headScript = $pluginManager->get(HeadScript::class);
             /* @var $bootstrap Bootstrap */
             $bootstrap = $pluginManager->getServiceLocator()->get('kjsencha.bootstrap');
 
             return new LoaderConfig($basePath, $headScript, $bootstrap);
         },
         'kjSenchaDirectApi' => function($pluginManager) {
-            /* @var $headScript \Laminas\View\Helper\HeadScript */
-            $headScript = $pluginManager->get('headScript');
-            /* @var $bootstrap \KJSencha\Frontend\Bootstrap */
+            /* @var $headScript HeadScript */
+            $headScript = $pluginManager->get(HeadScript::class);
+            /* @var $bootstrap Bootstrap */
             $bootstrap = $pluginManager->getServiceLocator()->get('kjsencha.bootstrap');
 
             return new DirectApi($headScript, $bootstrap);
