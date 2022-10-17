@@ -29,7 +29,7 @@ class ApiFactory implements FactoryInterface
         if (!$success) {
             /* @var $apiFactory \KJSencha\Direct\Remoting\Api\Factory\ApiBuilder */
             $apiFactory = $container->get('kjsencha.apibuilder');
-            /* @var $request \Zend\Http\PhpEnvironment\Request */
+            /* @var $request \Laminas\Http\PhpEnvironment\Request */
             $request = $container->get('Request');
             $api = $apiFactory->buildApi($config['kjsencha']['direct']);
             $url = $request->getBasePath() . $router->assemble(

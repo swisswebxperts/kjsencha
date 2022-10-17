@@ -59,7 +59,7 @@ return array(
             $config = $sl->get('Config');
             /** @var  $storage StorageAdapterFactoryInterface */
             $storage =  $sl->get(StorageAdapterFactoryInterface::class);
-            $storage->createFromArrayConfiguration($config['kjsencha']['cache']);
+            $storage->create($config['kjsencha']['cache']);
             return $storage;
         },
         /**
