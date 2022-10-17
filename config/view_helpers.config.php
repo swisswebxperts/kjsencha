@@ -14,7 +14,7 @@ use KJSencha\Frontend\Bootstrap;
 
 return array(
     'factories' => array(
-        'extJs' => function($pluginManager, ContainerInterface $container) {
+        'extJs' => function($pluginManager, $container) {
 
             $config = $container->get("Config");
 
@@ -33,7 +33,7 @@ return array(
 
             return new Variables($headScript, $bootstrap);
         },
-        'kjSenchaLoaderConfig' => function($pluginManager, ContainerInterface $container) {
+        'kjSenchaLoaderConfig' => function($pluginManager, $container) {
             /* @var $basePath \Laminas\View\Helper\BasePath */
             $basePath = $pluginManager->get('basePath');
             /* @var $headScript \Laminas\View\Helper\HeadScript */
@@ -43,7 +43,7 @@ return array(
 
             return new LoaderConfig($basePath, $headScript, $bootstrap);
         },
-        'kjSenchaDirectApi' => function($pluginManager, ContainerInterface $container) {
+        'kjSenchaDirectApi' => function($pluginManager, $container) {
             /* @var $headScript \Laminas\View\Helper\HeadScript */
             $headScript = $pluginManager->get('headScript');
             /* @var $bootstrap \KJSencha\Frontend\Bootstrap */
