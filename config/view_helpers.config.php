@@ -6,30 +6,34 @@ use KJSencha\View\Helper\ExtJS;
 use KJSencha\View\Helper\Variables;
 use KJSencha\View\Helper\LoaderConfig;
 use KJSencha\View\Helper\DirectApi;
-use Laminas\ServiceManager\AbstractPluginManager;
 use Psr\Container\ContainerInterface;
+
+use Laminas\View\Helper\HeadLink;
+use Laminas\View\Helper\HeadScript;
+use KJSencha\Frontend\Bootstrap;
 
 return array(
     'factories' => array(
-        'extJs' => function(AbstractPluginManager $pluginManager, ContainerInterface $container) {
+        'extJs' => function($pluginManager, ContainerInterface $container) {
+
             $config = $container->get("Config");
 
-            /* @var $headLink \Laminas\View\Helper\HeadLink */
+            /* @var $headLink HeadLink */
             $headLink = $pluginManager->get('headLink');
-            /* @var $headScript \Laminas\View\Helper\HeadScript */
+            /* @var $headScript HeadScript */
             $headScript = $pluginManager->get('headScript');
 
             return new ExtJS($config['kjsencha'], $headLink, $headScript);
         },
-        'kjSenchaVariables' => function(AbstractPluginManager $pluginManager, ContainerInterface $container) {
-            /* @var $headScript \Laminas\View\Helper\HeadScript */
+        'kjSenchaVariables' => function($pluginManager, ContainerInterface $container) {
+            /* @var $headScript HeadScript */
             $headScript = $pluginManager->get('headScript');
-            /* @var $bootstrap \KJSencha\Frontend\Bootstrap */
+            /* @var $bootstrap Bootstrap */
             $bootstrap = $container->get('kjsencha.bootstrap');
 
             return new Variables($headScript, $bootstrap);
         },
-        'kjSenchaLoaderConfig' => function(AbstractPluginManager $pluginManager, ContainerInterface $container) {
+        'kjSenchaLoaderConfig' => function($pluginManager, ContainerInterface $container) {
             /* @var $basePath \Laminas\View\Helper\BasePath */
             $basePath = $pluginManager->get('basePath');
             /* @var $headScript \Laminas\View\Helper\HeadScript */
@@ -39,7 +43,7 @@ return array(
 
             return new LoaderConfig($basePath, $headScript, $bootstrap);
         },
-        'kjSenchaDirectApi' => function(AbstractPluginManager $pluginManager, ContainerInterface $container) {
+        'kjSenchaDirectApi' => function($pluginManager, ContainerInterface $container) {
             /* @var $headScript \Laminas\View\Helper\HeadScript */
             $headScript = $pluginManager->get('headScript');
             /* @var $bootstrap \KJSencha\Frontend\Bootstrap */
