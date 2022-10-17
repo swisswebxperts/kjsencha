@@ -18,8 +18,6 @@ return array(
             /* @var $headScript \Laminas\View\Helper\HeadScript */
             $headScript = $pluginManager->get('headScript');
 
-            DeveloperDebug::dd($config['kjsencha']);
-
             return new ExtJS($config['kjsencha'], $headLink, $headScript);
         },
         'kjSenchaVariables' => function(AbstractPluginManager $pluginManager) {

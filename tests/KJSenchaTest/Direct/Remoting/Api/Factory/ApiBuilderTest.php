@@ -19,8 +19,6 @@ class ApiBuilderTest extends TestCase
     {
         $sl = ServiceManagerFactory::getServiceManager();
 
-        DeveloperDebug::dd($sl);
-
         $this->apiBuilder = $sl->get('kjsencha.apibuilder');
     }
 
