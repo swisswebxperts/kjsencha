@@ -2,7 +2,6 @@
 
 namespace KJSencha;
 
-use KJSencha\Util\DeveloperDebug;
 use KJSencha\View\Helper\ExtJS;
 use KJSencha\View\Helper\Variables;
 use KJSencha\View\Helper\LoaderConfig;
@@ -12,7 +11,7 @@ use Laminas\ServiceManager\AbstractPluginManager;
 return array(
     'factories' => array(
         'extJs' => function(AbstractPluginManager $pluginManager) {
-            $config = $pluginManager->getServiceLocator()->get('Config');
+            $config = $pluginManager->get('Config');
             /* @var $headLink \Laminas\View\Helper\HeadLink */
             $headLink = $pluginManager->get('headLink');
             /* @var $headScript \Laminas\View\Helper\HeadScript */
