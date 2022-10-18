@@ -2,6 +2,7 @@
 
 namespace KJSencha\Service\Factory;
 
+use Laminas\Cache\Storage\Adapter\Filesystem;
 use Laminas\Router\Http\RouteInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
@@ -18,7 +19,7 @@ class ApiFactory implements FactoryInterface
     {
         /* @var $config array */
         $config = $container->get('Config');
-        /* @var $cache \Laminas\Cache\Storage\StorageInterface */
+        /* @var $cache Filesystem */
         $cache = $container->get('kjsencha.cache');
         /* @var $router RouteInterface */
         $router = $container->get('HttpRouter');

@@ -59,8 +59,7 @@ return array(
             $config = $sl->get('Config');
             /** @var  $storage StorageAdapterFactoryInterface */
             $storage =  $sl->get(StorageAdapterFactoryInterface::class);
-            $storage->createFromArrayConfiguration($config['kjsencha']['cache']);
-            return $storage;
+            return $storage->createFromArrayConfiguration($config['kjsencha']['cache']);
         },
         /**
          * Bootstrap service that allows rendering of the API into an output that the
