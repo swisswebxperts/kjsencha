@@ -43,12 +43,7 @@ return array(
          */
         'cache' => array(
             'adapter' => \Laminas\Cache\Storage\Adapter\Memory::class,
-            'options' => array(
-                // Store cached data in this directory.
-                'cache_dir' => './data/cache',
-                // Store cached data for 1 hour.
-                'ttl' => 60 * 60 * 1
-            ),
+            'options' => array(),
             'plugins' => array(
                 'exception_handler' => array('throw_exceptions' => true),
                 'serializer'
