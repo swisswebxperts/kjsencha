@@ -39,9 +39,9 @@ return array(
         },
         'kjSenchaLoaderConfig' => function($pluginManager) {
             /* @var $basePath BasePath */
-            $basePath = $pluginManager->get('basePath');
+            $basePath = $pluginManager->get(BasePath::class);
             /* @var $headScript HeadScript */
-            $headScript = $pluginManager->get('headScript');
+            $headScript = $pluginManager->get(HeadScript::class);
             /* @var $bootstrap Bootstrap */
             $bootstrap = $pluginManager->getServiceLocator()->get('kjsencha.bootstrap');
 
