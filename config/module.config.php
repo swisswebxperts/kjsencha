@@ -42,19 +42,17 @@ return array(
          * Cache configuration
          */
         'cache' => array(
-            'adapter' => [
-                'name' => 'filesystem',
-                'options' => [
-                    'cache_dir' => getcwd() . './data/cache',
-                    'ttl'       => 3600,
-                ],
+            'adapter' => \Laminas\Cache\Storage\Adapter\Filesystem::class,
+            'options' => [
+                'cache_dir' => './data/cache', // Directory in which to put swapped memory blocks
+                'ttl'       => 3600,
             ],
             'plugins' => [
-                'serializer',
-                'exception_handler' => [
-                    'throw_exceptions' => false,
-                ],
-            ],
+                [
+                    'name' => 'serializer',
+                    'options' => []
+                ]
+            ]
         ),
 
         'cache_key' => 'module_api',

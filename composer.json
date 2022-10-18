@@ -23,6 +23,7 @@
         "ext-json": "*",
         "laminas/laminas-cache": "3.7.x-dev",
         "laminas/laminas-cache-storage-adapter-filesystem": "2.3.x-dev",
+        "laminas/laminas-serializer": "2.15.x-dev",
         "laminas/laminas-cli": "1.8.x",
         "laminas/laminas-code": "3.5.1",
         "doctrine/common": "^3.0"
