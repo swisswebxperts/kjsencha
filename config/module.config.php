@@ -45,6 +45,13 @@ return array(
             'adapter' => \Laminas\Cache\Storage\Adapter\Filesystem::class,
             'options' => [
                 'cache_dir' => './data/cache', // Directory in which to put swapped memory blocks
+                'ttl'       => 3600,
+            ],
+            'plugins' => [
+                'serializer',
+                'exception_handler' => [
+                    'throw_exceptions' => false,
+                ],
             ],
         ),
 
