@@ -86,7 +86,7 @@ return array(
          */
         'kjsencha.direct.manager' => function(ServiceManager $sm) {
             $directManager = new DirectManager();
-            $directManager->addPeeringServiceManager($sm);
+            $directManager->setServiceLocator($sm);
 
             return $directManager;
         },
