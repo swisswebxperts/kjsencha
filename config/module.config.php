@@ -20,7 +20,7 @@ return array(
         'direct' => array(
             'modules' => array(),
             'services' => array(
-                'KJSencha.echo' => 'kjsencha.echo',
+                'kjsencha.echo' => 'kjsencha.echo',
             ),
         ),
 
