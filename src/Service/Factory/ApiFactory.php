@@ -4,7 +4,6 @@ namespace KJSencha\Service\Factory;
 
 use Laminas\Router\Http\RouteInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Laminas\ServiceManager\ServiceLocatorInterface;
 use Psr\Container\ContainerInterface;
 
 class ApiFactory implements FactoryInterface

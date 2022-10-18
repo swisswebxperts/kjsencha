@@ -43,8 +43,10 @@ return array(
          */
         'cache' => array(
             'adapter'	=> array(
-                'name' => 'memory',
-                'options' => array(),
+                'name' => \Laminas\Cache\Storage\Adapter\Memory::class,
+                'options' => array(
+                    'throw_exceptions' => false
+                ),
             ),
             'plugins' => array(
                 'exception_handler' => array('throw_exceptions' => true),
