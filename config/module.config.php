@@ -42,11 +42,12 @@ return array(
          * Cache configuration
          */
         'cache' => array(
-            'adapter'	=> array(
-                'name' => \Laminas\Cache\Storage\Adapter\Memory::class,
-                'options' => array(
-                    'throw_exceptions' => false
-                ),
+            'adapter' => \Laminas\Cache\Storage\Adapter\Memory::class,
+            'options' => array(
+                // Store cached data in this directory.
+                'cache_dir' => './data/cache',
+                // Store cached data for 1 hour.
+                'ttl' => 60 * 60 * 1
             ),
             'plugins' => array(
                 'exception_handler' => array('throw_exceptions' => true),
