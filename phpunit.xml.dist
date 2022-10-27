@@ -9,16 +9,10 @@
     stopOnFailure="false"
     processIsolation="false"
     backupGlobals="false"
-    syntaxCheck="true"
 >
     <testsuite name="KJSencha tests">
         <directory>./tests</directory>
     </testsuite>
-    <filter>
-        <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
     <logging>
         <log
             type="coverage-html"

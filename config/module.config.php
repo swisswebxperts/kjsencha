@@ -42,10 +42,9 @@ return array(
          * Cache configuration
          */
         'cache' => array(
-            'adapter' => \Laminas\Cache\Storage\Adapter\Filesystem::class,
+            'adapter' => \Laminas\Cache\Storage\Adapter\Memory::class,
             'options' => [
-                'cache_dir' => './data/cache', // Directory in which to put swapped memory blocks
-                'ttl'       => 3600,
+                'memory_limit' => 2048, // Directory in which to put swapped memory blocks
             ],
             'plugins' => [
                 [
