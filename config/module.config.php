@@ -44,7 +44,7 @@ return array(
         'cache' => array(
             'adapter' => \Laminas\Cache\Storage\Adapter\Memory::class,
             'options' => [
-                'memory_limit' => 9999999, // Directory in which to put swapped memory blocks
+                'memory_limit' => -1, // Directory in which to put swapped memory blocks
             ],
             'plugins' => [
                 [
