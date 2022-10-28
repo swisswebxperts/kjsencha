@@ -3,8 +3,7 @@
 namespace KJSencha\Frontend;
 
 use ArrayObject;
-use KJSencha\Direct\Remoting\Api\Api;
-use Laminas\Stdlib\ArrayUtils;
+use KJSencha\Direct\Remoting\Api\ModuleApi;
 use Laminas\View\Model\ViewModel;
 
 /**
@@ -14,19 +13,13 @@ use Laminas\View\Model\ViewModel;
  */
 class Bootstrap
 {
-
-    /**
-     * @see http://docs.sencha.com/ext-js/4-1/#!/api/Ext.Loader-cfg-paths
-     * @var array
-     */
-    protected $paths		= array();
-    protected $parameters	= array();
-    protected $variables	= array();
-    protected $requires		= array();
-    protected $views        = array();
+    protected $parameters = array();
+    protected $paths = array();
+    protected $variables = array();
+    protected $requires = array();
+    protected $modules = array();
     protected $viewModel;
-
-    protected $template     = 'kjsencha/bootstrap';
+    protected $template = 'kjsencha/bootstrap';
     protected $directApi;
 
     /**
@@ -34,6 +27,8 @@ class Bootstrap
      */
     public function __construct($options = array())
     {
+        $this->variabeles = new ArrayObject;
+
         $this->viewModel = new ViewModel;
         $this->viewModel->setTemplate($this->template);
 
@@ -61,19 +56,28 @@ class Bootstrap
     public function setOption($key, $value)
     {
         switch (strtolower($key)) {
+
             case 'modules':
                 $this->setModules($value);
                 break;
+
             case 'require':
             case 'requires':
                 $this->setRequires($value);
                 break;
+
             case 'paths':
                 $this->setPaths($value);
                 break;
+
             case 'variables':
                 $this->setVariables($value);
                 break;
+
+            case 'directapi':
+                $this->setDirectApi($value);
+                break;
+
             default:
                 $this->parameters[$key] = $value;
                 break;
@@ -97,7 +101,7 @@ class Bootstrap
      */
     public function addVariables(array $variables)
     {
-        $this->variables = ArrayUtils::merge($this->variables, $variables);
+        $this->variables = array_merge($this->variables, $variables);
     }
 
     /**
@@ -171,25 +175,9 @@ class Bootstrap
     }
 
     /**
-     * @return array
-     */
-    public function getComponents()
-    {
-        return $this->views;
-    }
-
-    /**
-     * @param Component $view
-     */
-    public function addComponent(Component $view)
-    {
-        $this->views[] = $view;
-    }
-
-    /**
      * Retrieve the API
      *
-     * @return Api
+     * @return ModuleApi
      */
     public function getDirectApi()
     {
@@ -199,9 +187,9 @@ class Bootstrap
     /**
      * Set the Direct API
      *
-     * @param Api $directApi
+     * @param ModuleApi $directApi
      */
-    public function setDirectApi(Api $directApi)
+    public function setDirectApi(ModuleApi $directApi)
     {
         $this->directApi = $directApi;
     }
@@ -211,15 +199,11 @@ class Bootstrap
      */
     public function getViewModel()
     {
-        $parameters = array_merge(
-            $this->parameters,
-            array(
-                'bootstrap' => $this,
-            )
-        );
-
-        $this->viewModel->setVariables($parameters);
+        $this->viewModel->setVariables(array_merge($this->parameters, array(
+            'bootstrap' => $this,
+        )));
 
         return $this->viewModel;
     }
+
 }

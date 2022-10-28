@@ -10,9 +10,9 @@ class MessageBox extends Component
     /**
      * Expression for alert message
      *
-     * @param  string   $title
-     * @param  string   $message
-     * @return Ext\Expr
+     * @param  [type] $title   [description]
+     * @param  [type] $message [description]
+     * @return [type] [description]
      */
     public static function alert($title, $message)
     {

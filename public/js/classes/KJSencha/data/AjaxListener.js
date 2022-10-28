@@ -29,8 +29,9 @@ Ext.define('KJSencha.data.AjaxListener', {
      *
      * @param  {Ext.data.Connection} conn
      * @param  {XMLHttpRequest} xhr
+     * @param  {Object} options
      */
-    onRequestComplete: function(conn, xhr)
+    onRequestComplete: function(conn, xhr, options)
     {
         var json = Ext.decode(xhr.responseText),
             evil = eval;
@@ -54,8 +55,8 @@ Ext.define('KJSencha.data.AjaxListener', {
         Ext.Array.each(components, function(comp){
             var target = Ext.ComponentQuery.query(comp.selector)[0];
             if (target) {
-                target.add(comp.config);
+                target.add(comp.config)
             }
         });
     }
-});
+})

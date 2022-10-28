@@ -2,16 +2,11 @@
 
 namespace KJSencha\Direct\Remoting\Api\Object;
 
-use InvalidArgumentException;
-
 /**
  * A method which can be run by Ext.Direct
  */
 class Method extends AbstractObject
 {
-    /**
-     * @var int
-     */
     private $numberOfParameters = 0;
 
     /**
@@ -40,17 +35,22 @@ class Method extends AbstractObject
     }
 
     /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return array_merge(parent::toArray(), $this->toApiArray());
+    }
+
+    /**
      * @inheritdoc
      */
     public function toApiArray()
     {
-        return array_merge(
-            $this->getOptions(),
-            array(
-                'name'  => $this->getName(),
-                'len'   => $this->getNumberOfParameters(),
-            )
-        );
+        return array_merge($this->getOptions(), array(
+            'name'  => $this->getName(),
+            'len'   => $this->getNumberOfParameters(),
+        ));
     }
 
     /**
@@ -65,63 +65,10 @@ class Method extends AbstractObject
     }
 
     /**
-     * Retrieve options
-     *
      * @return array
      */
     public function getOptions()
     {
         return $this->options;
-    }
-
-    /**
-     * Retrieve a single option
-     *
-     * @param string $key
-     * @return string
-     */
-    public function getOption($key)
-    {
-        if (!isset($this->options[$key])) {
-            return null;
-        }
-
-        return $this->options[$key];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function serialize()
-    {
-        $data = array(
-            'numberOfParameters'    => $this->getNumberOfParameters(),
-            'options'               => $this->getOptions(),
-            'parentData'            => parent::serialize(),
-        );
-
-        return serialize($data);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function unserialize($serialized)
-    {
-        $data = unserialize($serialized);
-
-        if (!is_array($data) || !isset($data['parentData'])) {
-            throw new InvalidArgumentException('Incorrect unserialized data');
-        }
-
-        if (isset($data['numberOfParameters'])) {
-            $this->setNumberOfParameters($data['numberOfParameters']);
-        }
-
-        if (isset($data['options'])) {
-            $this->options = $data['options'];
-        }
-
-        parent::unserialize($data['parentData']);
     }
 }

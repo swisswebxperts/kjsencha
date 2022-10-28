@@ -2,27 +2,14 @@
 
 namespace KJSencha\Direct\Remoting\Api\Object;
 
-use Serializable;
-
-abstract class AbstractObject implements Serializable
+abstract class AbstractObject
 {
-    /**
-     * @var string
-     */
     private $name;
-
-    /**
-     * @var string
-     */
     private $objectName;
-
-    /**
-     * @var mixed[]
-     */
     private $children = array();
 
     /**
-     * @param string $objectName
+     * @param type $objectName
      */
     public function __construct($objectName)
     {
@@ -33,11 +20,11 @@ abstract class AbstractObject implements Serializable
     /**
      * Set the name of this object
      *
-     * @param string $name name of the object as exposed to the js api
+     * @param string $name Objectname
      */
     public function setName($name)
     {
-        $this->name = (string) $name;
+        $this->name = $name;
     }
 
     /**
@@ -51,11 +38,11 @@ abstract class AbstractObject implements Serializable
     /**
      * Set the name of this object
      *
-     * @param string $objectName name of the object as known in backend
+     * @param string $name Objectname
      */
-    public function setObjectName($objectName)
+    protected function setObjectName($objectName)
     {
-        $this->objectName = (string) $objectName;
+        $this->objectName = $objectName;
     }
 
     /**
@@ -83,41 +70,14 @@ abstract class AbstractObject implements Serializable
     }
 
     /**
-     * {@inheritDoc}
+     * @return array
      */
-    public function serialize()
+    public function toArray()
     {
-        $data = array(
-            'name'       => $this->getName(),
-            'objectName' => $this->getObjectName(),
-            'children'   => $this->getChildren(),
+        return array(
+            'name'          => $this->getObjectName(),
+            'objectName'    => $this->getObjectName(),
         );
-
-        return serialize($data);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function unserialize($serialized)
-    {
-        $data = unserialize($serialized);
-
-        if (!is_array($data)) {
-            throw new \InvalidArgumentException('Incorrect unserialized data');
-        }
-
-        if (isset($data['name'])) {
-            $this->setName($data['name']);
-        }
-
-        if (isset($data['objectName'])) {
-            $this->setObjectName($data['objectName']);
-        }
-
-        if (isset($data['children'])) {
-            $this->children = $data['children'];
-        }
     }
 
     /**

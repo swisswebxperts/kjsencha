@@ -4,6 +4,7 @@ namespace KJSencha\Direct\Remoting;
 
 use Laminas\Stdlib\ArrayUtils;
 
+
 /**
  * RPC Object
  *
@@ -33,7 +34,7 @@ class RPC
     protected $action;
 
     /**
-     * Method name
+     * Methodname
      *
      * @var string
      */

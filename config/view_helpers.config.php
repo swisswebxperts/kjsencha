@@ -3,57 +3,18 @@
 namespace KJSencha;
 
 use KJSencha\View\Helper\ExtJS;
-use KJSencha\View\Helper\Variables;
-use KJSencha\View\Helper\LoaderConfig;
-use KJSencha\View\Helper\DirectApi;
 use Laminas\ServiceManager\AbstractPluginManager;
-use Laminas\ServiceManager\PluginManagerInterface;
-use Psr\Container\ContainerInterface;
-
-use Laminas\View\Helper\HeadLink;
-use Laminas\View\Helper\HeadScript;
-use KJSencha\Frontend\Bootstrap;
-use Laminas\View\Helper\BasePath;
 
 return array(
     'factories' => array(
-        'extJs' => function($pluginManager) {
+        'extJs' => function(AbstractPluginManager $pluginManager) {
+            $config = $pluginManager->getServiceLocator()->get('config');
 
-            /** @var $pluginManager AbstractPluginManager  */
-            $config = $pluginManager->getServiceLocator()->get("Config");
-
-            /* @var $headLink HeadLink */
-            $headLink = $pluginManager->get(HeadLink::class);
-            /* @var $headScript HeadScript */
-            $headScript = $pluginManager->get(HeadScript::class);
-
-            return new ExtJS($config['kjsencha'], $headLink, $headScript);
-        },
-        'kjSenchaVariables' => function($pluginManager) {
-            /* @var $headScript HeadScript */
-            $headScript = $pluginManager->get(HeadScript::class);
-            /* @var $bootstrap Bootstrap */
-            $bootstrap = $pluginManager->getServiceLocator()->get('kjsencha.bootstrap');
-
-            return new Variables($headScript, $bootstrap);
-        },
-        'kjSenchaLoaderConfig' => function($pluginManager) {
-            /* @var $basePath BasePath */
-            $basePath = $pluginManager->get(BasePath::class);
-            /* @var $headScript HeadScript */
-            $headScript = $pluginManager->get(HeadScript::class);
-            /* @var $bootstrap Bootstrap */
-            $bootstrap = $pluginManager->getServiceLocator()->get('kjsencha.bootstrap');
-
-            return new LoaderConfig($basePath, $headScript, $bootstrap);
-        },
-        'kjSenchaDirectApi' => function($pluginManager) {
-            /* @var $headScript HeadScript */
-            $headScript = $pluginManager->get(HeadScript::class);
-            /* @var $bootstrap Bootstrap */
-            $bootstrap = $pluginManager->getServiceLocator()->get('kjsencha.bootstrap');
-
-            return new DirectApi($headScript, $bootstrap);
+            return new ExtJS(
+                $config['kjsencha']['library_path'],
+                $pluginManager->get('headLink'),
+                $pluginManager->get('headScript')
+            );
         },
     )
 );

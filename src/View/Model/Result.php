@@ -11,7 +11,7 @@ class Result extends JsonModel
 {
     /**
      * Make sure we merge everything, used by RenderingStrategy
-     * @var bool
+     * @var type
      */
     protected $mergeUnnamedChildren = true;
 
@@ -38,7 +38,7 @@ class Result extends JsonModel
     {
         parent::__construct($variables, $options);
 
-        $this->success = true;
+        $this->success = TRUE;
     }
 
     /**
@@ -116,14 +116,15 @@ class Result extends JsonModel
     }
 
     /**
-     * {@inheritDoc}
+     * Convert to array
+     *
+     * @return array
      */
     public function serialize()
     {
         // Parse the _exec queue
         if ($exec = $this->exec) {
             $result = '';
-
             if (is_array($exec)) {
                 foreach ($exec as $cmd) {
                     $result.= (string) $cmd . ';';
@@ -131,11 +132,10 @@ class Result extends JsonModel
             } else {
                 $result = (string) $exec . ';';
             }
-
             $this->setVariable('_exec', $result);
         }
 
-            // Parse the add queue
+        // Parse the add queue
         if ($exec = $this->add) {
             $this->setVariable('_add', $this->add);
         }

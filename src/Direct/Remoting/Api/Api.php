@@ -1,26 +1,27 @@
 <?php
 
 namespace KJSencha\Direct\Remoting\Api;
-
-use InvalidArgumentException;
+use Exception;
 use KJSencha\Direct\Remoting\Api\Object\Action;
 use KJSencha\Frontend\Direct\RemotingProvider;
-use Serializable;
 
 /**
- * A simple container which holds API's from multiple modules
+ * Ext.Direct API
  */
-class Api implements Serializable, ApiInterface
+class Api implements ApiInterface
 {
-    /**
-     * @var string
-     */
-    protected $url = '';
 
     /**
-     * @var Action[]
+     * @var array
      */
     protected $actions = array();
+
+    /**
+     * Javascript variable name which will hold the Ext.Direct functions
+     *
+     * @var string
+     */
+    protected $namespace = 'Direct';
 
     /**
      * ExtJS Widget which will be used
@@ -30,28 +31,70 @@ class Api implements Serializable, ApiInterface
     protected $type = 'kjsenchamoduleremoting';
 
     /**
-     * {@inheritDoc}
+     * URL where the requests will be send
+     *
+     * @var string
      */
-    public function setUrl($url)
+    protected $url;
+
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @param array $options
+     */
+    public function __construct(array $options = null)
     {
-        $this->url = (string) $url;
+        if ($options) {
+            $this->setOptions($options);
+        }
     }
 
     /**
-     * {@inheritDoc}
+     * Set options
+     *
+     * @param array $options
      */
-    public function getUrl()
+    public function setOptions(array $options)
     {
-        return $this->url;
+        foreach ($options as $key => $value) {
+            switch ($key) {
+                case 'actions':
+                    $this->actions = $value;
+                    break;
+                case 'namespace':
+                    $this->setNamespace($value);
+                    break;
+                case 'type':
+                    $this->setType($value);
+                    break;
+                case 'url':
+                    $this->setUrl($value);
+                    break;
+            }
+        }
     }
 
     /**
-     * @param string $name
-     * @param Action $action
+     * Add a action to the API
+     *
+     * @param Action $object Direct object
      */
-    public function addAction($name, Action $action)
+    public function addAction(Action $action)
     {
-        $this->actions[(string) $name] = $action;
+        $this->actions[$action->getName()] = $action;
+    }
+
+    /**
+     * Return API actions
+     *
+     * @return Action[] Actions
+     */
+    public function getActions()
+    {
+        return $this->actions;
     }
 
     /**
@@ -64,24 +107,33 @@ class Api implements Serializable, ApiInterface
 
     /**
      * {@inheritDoc}
-     *
-     * @throws InvalidArgumentException
      */
     public function getAction($name)
     {
-        if (!array_key_exists($name, $this->actions)) {
-            throw new InvalidArgumentException('Requested action "' . $name . '" does not exist');
+        if (!$this->hasAction($name)) {
+            throw new Exception('Action does not exist');
         }
 
         return $this->actions[$name];
     }
 
     /**
-     * @return Action[]
+     * @return string
      */
-    public function getActions()
+    public function getNamespace()
     {
-        return $this->actions;
+        return $this->namespace;
+    }
+
+    /**
+     * Set the The name which will be used javascript side to hold the
+     * Ext.Direct methods
+     *
+     * @param string $namespace
+     */
+    public function setNamespace($namespace)
+    {
+        $this->namespace = $namespace;
     }
 
     /**
@@ -101,25 +153,78 @@ class Api implements Serializable, ApiInterface
      */
     public function setType($type)
     {
-        $this->type = (string) $type;
+        $this->type = $type;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
     }
 
     /**
      * @return array
+     */
+    public function toArray()
+    {
+        $defaults = array(
+            'type'      => $this->getType(),
+            'url'       => $this->getUrl(),
+            'name'      => $this->getNamespace(),
+            'namespace' => $this->getNamespace(),
+            'actions'   => array(),
+        );
+
+        foreach ($this->getActions() as $action) {
+
+            $methods = array();
+
+            foreach ($action->getMethods() as $method) {
+                $methods[] = array_merge($method->toArray(), array(
+                    'module' => $this->getNamespace(),
+                ));
+            }
+
+            $actionArray = array_merge($action->toArray(), array(
+                'methods' => $methods,
+            ));
+
+            $defaults['actions'][$action->getName()] = $actionArray;
+        }
+
+        return $defaults;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public function toApiArray()
     {
         $defaults = array(
             'type' => $this->getType(),
             'url' => $this->getUrl(),
+            'namespace' => $this->getNamespace(),
             'actions' => array(),
         );
 
         foreach ($this->getActions() as $action) {
+
             $methods = array();
 
             foreach ($action->getMethods() as $method) {
-                $methods[] = $method->toApiArray();
+                $methods[] = array_merge($method->toApiArray(), array(
+                    'module' => $this->getName(),
+                ));
             }
 
             $defaults['actions'][$action->getName()] = $methods;
@@ -131,46 +236,24 @@ class Api implements Serializable, ApiInterface
     /**
      * {@inheritDoc}
      */
-    public function buildRemotingProvider()
+    public function buildRemotingProvider(array $options = array())
     {
-        return new RemotingProvider($this->toApiArray());
+        return new RemotingProvider(array_merge($this->toApiArray(), $options));
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function serialize()
+    public function getName()
     {
-        $data = array(
-            'type'    => $this->getType(),
-            'url'     => $this->getUrl(),
-            'actions' => $this->getActions(),
-        );
-
-        return serialize($data);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function unserialize($serialized)
-    {
-        $data = unserialize($serialized);
-
-        if (!is_array($data)) {
-            throw new \InvalidArgumentException('Incorrect unserialized data');
-        }
-
-        if (isset($data['type'])) {
-            $this->setType($data['type']);
-        }
-
-        if (isset($data['url'])) {
-            $this->setUrl($data['url']);
-        }
-
-        foreach ($data['actions'] as $actionName => $action) {
-            $this->addAction($actionName, $action);
-        }
+        return $this->name;
     }
 }

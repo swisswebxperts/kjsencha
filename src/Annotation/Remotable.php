@@ -41,7 +41,7 @@ class Remotable
     }
 
     /**
-     * @return bool
+     * @return type
      */
     public function hasName()
     {

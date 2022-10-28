@@ -9,19 +9,7 @@ namespace KJSencha\Frontend;
  */
 class Component extends Base
 {
-    /**
-     * Classname of this component
-     *
-     * @var string
-     */
     protected $className;
-
-    /**
-     * Extend
-     *
-     * @var string
-     */
-    protected $extend;
 
     /**
      * Create a Component class
@@ -29,7 +17,7 @@ class Component extends Base
      * @param string $name
      * @param array  $attributes
      */
-    public function __construct($name = null, array $attributes = null)
+    public function __construct($name = NULL, array $attributes = NULL)
     {
         parent::__construct($name, $attributes);
 
@@ -45,7 +33,7 @@ class Component extends Base
     /**
      * Set the classname
      *
-     * @param  string $className
+     * @param  string                   $className
      * @return self
      */
     public function setClassName($className)
@@ -68,8 +56,7 @@ class Component extends Base
     /**
      * Set the class which this class should extend
      *
-     * @param  string $extends
-     * @return self
+     * @param string $extends
      */
     public function setExtend($extends)
     {
@@ -79,29 +66,19 @@ class Component extends Base
     }
 
     /**
-     * @return string
-     */
-    public function getExtend()
-    {
-        return $this->getProperty('extend');
-    }
-
-    /**
      * Create this class javascript side
      *
-     * @param  string $name of class that is created
-     * @return Expr
+     * @return string Optional name of class that is created
      */
-    public static function create(Component $obj = null)
+    public function create($name = NULL)
     {
-        if (null == $obj) {
-            $obj = new static();
-        }
+        $className = $name ?: $this['extend'];
+        $className = $className ?: $this->getClassName();
 
         $output = sprintf(
             "Ext.create('%s', %s);",
-            $obj->getClassName(),
-            $obj->toJson()
+            $className,
+            $this->toJson()
         );
 
         return new Expr($output);
@@ -110,21 +87,14 @@ class Component extends Base
     /**
      * Retrieve the code to define this PHP class
      *
-     * @return Expr
+     * @return
      */
-    public static function define(Component $obj = null)
+    public function define()
     {
-        if (null == $obj ) {
-            $obj = new static();
-        }
-
-        $obj = clone $obj;
-        unset($obj['xtype']);
-
         $output = sprintf(
             "Ext.define('%s', %s);",
-            $obj->getClassName(),
-            $obj->toJson()
+            $this->className,
+            $this->toJson()
         );
 
         return new Expr($output);

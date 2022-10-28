@@ -21,7 +21,7 @@ class Panel extends Component
      * @param  array  $attrs
      * @return Panel
      */
-    public function addColumn($name, $attrs = null)
+    public function addColumn($name, $attrs = NULL)
     {
         if (is_array($name)) {
             $column = $name;
