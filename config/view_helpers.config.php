@@ -7,7 +7,7 @@ use Laminas\ServiceManager\AbstractPluginManager;
 
 return array(
     'factories' => array(
-        'extJs' => function(AbstractPluginManager $pluginManager) {
+        'extJs' => function($pluginManager) {
             $config = $pluginManager->getServiceLocator()->get('config');
 
             return new ExtJS(
