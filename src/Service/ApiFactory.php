@@ -4,12 +4,14 @@ namespace KJSencha\Service;
 
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceManager;
 use Psr\Container\ContainerInterface;
 
 class ApiFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
+        $this->createService($container->get(ServiceManager::class));
     }
 
     /**

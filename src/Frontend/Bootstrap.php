@@ -189,7 +189,6 @@ class Bootstrap
     /**
      * Retrieve the API
      *
-     * @return Api
      */
     public function getDirectApi()
     {
@@ -199,9 +198,9 @@ class Bootstrap
     /**
      * Set the Direct API
      *
-     * @param Api $directApi
+     * @param $directApi
      */
-    public function setDirectApi(Api $directApi)
+    public function setDirectApi($directApi)
     {
         $this->directApi = $directApi;
     }

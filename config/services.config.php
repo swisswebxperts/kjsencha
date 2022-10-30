@@ -69,7 +69,6 @@ return array(
                     'basePath' => $sl->get('Request')->getBasePath(),
                 )
             ));
-            /* @var $directApi \KJSencha\Direct\Remoting\Api\Api */
             $directApi = $sl->get('kjsencha.api');
             $bootstrap->setDirectApi($directApi);
 

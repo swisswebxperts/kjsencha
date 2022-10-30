@@ -42,14 +42,16 @@ return array(
          * Cache configuration
          */
         'cache' => array(
-            'adapter'	=> array(
-                'name' => 'memory',
-                'options' => array(),
-            ),
-            'plugins' => array(
-                'exception_handler' => array('throw_exceptions' => true),
-                'serializer'
-            )
+            'adapter' => \Laminas\Cache\Storage\Adapter\Memory::class,
+            'options' => [
+                'memory_limit' => -1, // Directory in which to put swapped memory blocks
+            ],
+            'plugins' => [
+                [
+                    'name' => 'serializer',
+                    'options' => []
+                ]
+            ]
         ),
 
         'cache_key' => 'module_api',
