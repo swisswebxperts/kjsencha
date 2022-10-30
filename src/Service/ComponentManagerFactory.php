@@ -5,6 +5,7 @@ namespace KJSencha\Service;
 use Laminas\Mvc\Service\ServiceManagerConfig;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceManager;
 use Laminas\Stdlib\ArrayUtils;
 use Psr\Container\ContainerInterface;
 
@@ -17,6 +18,11 @@ use Psr\Container\ContainerInterface;
  */
 class ComponentManagerFactory implements FactoryInterface
 {
+
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
+    {
+        $this->createService($container->get(ServiceManager::class));
+    }
 
     /**
      * @param ServiceLocatorInterface $serviceLocator
@@ -50,8 +56,5 @@ class ComponentManagerFactory implements FactoryInterface
         return new ServiceManagerConfig($config);
     }
 
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
-    {
-        // TODO: Implement __invoke() method.
-    }
+
 }

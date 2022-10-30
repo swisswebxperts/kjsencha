@@ -9,7 +9,7 @@ return array(
      */
     'kjsencha' => array(
         // Path from which ExtJs should be loaded
-        'library_path'   => 'http://cdn.sencha.io/ext-4.2.0-gpl/',
+        'library_path'   => 'https://cdn.sencha.com/ext/gpl/4.1.1/',
         'js'             => array(
             'ext' => 'ext-all.js',
         ),
@@ -18,7 +18,6 @@ return array(
         ),
 
         'direct' => array(
-            'modules' => array(),
             'services' => array(
                 'KJSencha.echo' => 'kjsencha.echo',
             ),
@@ -59,7 +58,7 @@ return array(
         /**
          * Debug mode is used to show more information when server exceptions occur
          */
-        'debug_mode' => false,
+        'debug_mode' => true,
     ),
 
     'view_manager' => array(
