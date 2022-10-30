@@ -26,7 +26,6 @@ class ComponentManagerFactory implements FactoryInterface
     {
         $serviceConfig = $this->createConfig($serviceLocator);
         $componentManager = new ComponentManager($serviceConfig);
-        $componentManager->addPeeringServiceManager($serviceLocator);
         return $componentManager;
     }
 
