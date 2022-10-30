@@ -54,7 +54,8 @@ return array(
          */
         'kjsencha.cache' => function(ServiceLocatorInterface $sl) {
             $config = $sl->get('Config');
-            $storage = StorageFactory::factory($config['kjsencha']['cache']);
+            $storageFactory = $sl->get(StorageAdapterFactoryInterface::class);
+            $storage = $storageFactory->createFromArrayConfiguration($config['kjsencha']['cache']);
             return $storage;
         },
         /**
