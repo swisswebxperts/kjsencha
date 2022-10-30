@@ -11,7 +11,7 @@ use Laminas\View\Helper\HeadScript;
 return array(
     'factories' => array(
         'extJs' => function($pluginManager) {
-            $config = $pluginManager->getServiceLocator()->get('config');
+            $config = $pluginManager->getServiceLocator()->get('Config');
 
             return new ExtJS(
                 $config['kjsencha']['library_path'],
