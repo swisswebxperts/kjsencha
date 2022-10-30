@@ -7,6 +7,7 @@ use KJSencha\Frontend\Bootstrap;
 use KJSencha\Direct\Remoting\Api\Factory\ModuleFactory;
 use KJSencha\Direct\DirectManager;
 
+use KJSencha\Service\TestEchoService;
 use Laminas\Cache\Service\StorageAdapterFactoryInterface;
 use Laminas\Code\Annotation\AnnotationManager;
 use Laminas\Code\Annotation\Parser\DoctrineAnnotationParser;
