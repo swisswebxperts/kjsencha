@@ -1,4 +1,3 @@
-
 /**
  * KJ Sencha Direct Provider
  */
@@ -8,16 +7,8 @@ Ext.define('KJSencha.direct.ModuleRemotingProvider', {
 
     alias: 'direct.kjsenchamoduleremotingprovider',
 
-
-    // Overwrite constructor so we can take the namespace
-    constructor : function(config) {
-        this.namespaceName = config.namespace;
-        this.callParent(arguments);
-    },
-
     initAPI : function(){
         var actions = this.actions,
-            namespace = this.namespace,
             action,
             cls,
             methods,
@@ -26,15 +17,8 @@ Ext.define('KJSencha.direct.ModuleRemotingProvider', {
             method;
 
         for (action in actions) {
+            cls = Ext.ns(action);
             methods = actions[action];
-            var className	= action.replace(/\\/g, '.'),
-                objectPath	= this.namespaceName,
-                pos			= className.lastIndexOf('.');
-
-            if ( -1 != pos) {
-                className = className.substr(0, pos).toLowerCase() + '.' + className.substr(pos+1);
-            }
-            cls = Ext.ns(objectPath + '.' + className);
 
             for (i = 0, len = methods.length; i < len; ++i) {
                 method = new Ext.direct.RemotingMethod(methods[i]);
@@ -79,7 +63,6 @@ Ext.define('KJSencha.direct.ModuleRemotingProvider', {
      * @param {Object} scope (optional) A scope to execute the callback in
      */
     configureFormRequest : function(action, method, form, callback, scope){
-
         var me = this,
             transaction = new Ext.direct.Transaction({
                 provider: me,

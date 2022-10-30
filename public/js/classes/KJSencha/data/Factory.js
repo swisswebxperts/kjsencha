@@ -10,6 +10,7 @@ Ext.define('KJSencha.data.Factory', {
     servicePath: App.basePath + '/kjsencha/data/service',
     serviceParameters: {},
     pollingPath: App.basePath + '/kjsencha/data/polling',
+    cmpPath: App.basePath + '/kjsencha/data/component',
 
     /**
      * Create a REST configuration that can be used in models
@@ -74,9 +75,10 @@ Ext.define('KJSencha.data.Factory', {
     /**
      * Create a REST configuration that can be used in models
      *
-     * @param {Object/String} options
-     * @param {String} options.module Name of the module to use
-     * @param {String} options.model Model name, relative to your PHP namespace
+     * @param {Object/String} config
+     * @param {String} config.module Name of the module to use
+     * @param {String} config.model Model name, relative to your PHP namespace
+     * @param {String} className Name of the proxy class
      * @return {Ext.data.proxy.Rest} Proxy which can be used in a model
      */
     createRestProxy: function(config, className)
@@ -84,7 +86,7 @@ Ext.define('KJSencha.data.Factory', {
         config = this.createRestConfig(config);
         className = className || 'Ext.data.proxy.Rest';
 
-        return Ext.create('Ext.data.proxy.Rest', config);
+        return Ext.create(className, config);
     },
 
     /**
@@ -121,10 +123,10 @@ Ext.define('KJSencha.data.Factory', {
             proxy: {
                 type: 'ajax',
                 api: {
-                    create: 	this.servicePath + '?xaction=create',
-                    read: 		this.servicePath + '?xaction=read',
-                    update: 	this.servicePath + '?xaction=update',
-                    destroy: 	this.servicePath + '?xaction=delete'
+                    create:     this.servicePath + '?xaction=create',
+                    read:       this.servicePath + '?xaction=read',
+                    update:     this.servicePath + '?xaction=update',
+                    destroy:    this.servicePath + '?xaction=delete'
                 },
                 reader: {
                     type: 'json',
@@ -144,9 +146,10 @@ Ext.define('KJSencha.data.Factory', {
     /**
      * Store factory
      *
-     * @param {Object/String} options
-     * @param {String} options.module Name of the module to use
-     * @param {String} options.action Action which will be executed
+     * @param {Object/String} config
+     * @param {String} config.module Name of the module to use
+     * @param {String} config.action Action which will be executed
+     * @param {String} className Name of the proxy class
      * @return {Ext.data.Store}
      */
     createServiceStore: function(config, className)
@@ -204,5 +207,28 @@ Ext.define('KJSencha.data.Factory', {
         };
 
         return Ext.merge(data, config);
+    },
+
+    /**
+     * @param {String|Object} componentConfig Component name or configuration
+     * @return {Object}
+     */
+    createCmpLoader: function(componentConfig)
+    {
+        var params = {};
+
+        if (Ext.isString(componentConfig)) {
+            params.componentName = componentConfig;
+        }
+        else if (Ext.isSimpleObject(componentConfig)) {
+            params.componentConfig = JSON.stringify(componentConfig);
+        }
+
+        return {
+            url: this.cmpPath,
+            renderer: 'component',
+            autoLoad: true,
+            params: params
+        };
     }
 });
