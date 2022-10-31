@@ -45,9 +45,9 @@ class ApiBuilder
         $actions = array();
 
         // legacy code, probably to be removed
-        if (isset($apiConfig['modules']) && is_array($apiConfig['modules'])) {
+        /*if (isset($apiConfig['modules']) && is_array($apiConfig['modules'])) {
             $actions = ArrayUtils::merge($actions, $this->buildDirectoryApi($apiConfig['modules']));
-        }
+        }*/
 
         if (isset($apiConfig['services']) && is_array($apiConfig['services'])) {
             $actions = ArrayUtils::merge($actions, $this->buildServiceApi($apiConfig['services']));
@@ -89,7 +89,7 @@ class ApiBuilder
             $jsNamespace = rtrim(str_replace('\\', '.', $module['namespace']), '.') . '.';
             $directoryScanner = new DirectoryScanner($module['directory']);
 
-            /* @var $class \Zend\Code\Scanner\DerivedClassScanner */
+            /* @var $class \Laminas\Code\Scanner\DerivedClassScanner */
             foreach ($directoryScanner->getClasses(true) as $class) {
                 // now building the service name as exposed client-side
                 $className = $class->getName();

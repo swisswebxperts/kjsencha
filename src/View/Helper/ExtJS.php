@@ -3,7 +3,6 @@
 namespace KJSencha\View\Helper;
 
 use Laminas\View\Helper\AbstractHelper;
-use Laminas\Stdlib\ArrayUtils;
 use Laminas\View\Helper\HeadLink;
 use Laminas\View\Helper\HeadScript;
 /**
