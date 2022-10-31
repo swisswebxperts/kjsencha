@@ -16,7 +16,6 @@ return array(
         'css'            => array(
             'ext' => 'resources/css/ext-all.css',
         ),
-
         'direct' => array(
             'services' => array(
                 //'KJSencha.echo' => 'kjsencha.echo',
