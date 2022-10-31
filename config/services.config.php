@@ -65,7 +65,6 @@ return array(
         'kjsencha.bootstrap' => function(ServiceLocatorInterface $sl) {
             $config = $sl->get('Config');
             $bootstrap = new Bootstrap($config['kjsencha']['bootstrap']['default']);
-            var_dump($bootstrap);die();
             $bootstrap->addVariables(array(
                 'App' => array(
                     'basePath' => $sl->get('Request')->getBasePath(),
