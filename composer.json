@@ -34,5 +34,5 @@
         "allow-plugins": {
             "laminas/laminas-dependency-plugin": true
         }
-    },
+    }
 }
