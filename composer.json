@@ -1,5 +1,5 @@
 {
-    "name": "alysongustavo/kj-sencha",
+    "name": "swisswebxperts/kj-sencha",
     "description": "Ext-JS / Sencha Touch RPC Intergration Module for Mezzio Framework",
     "type": "library",
     "license": "MIT",
