@@ -35,7 +35,4 @@
             "laminas/laminas-dependency-plugin": true
         }
     },
-    "require-dev": {
-        "laminas/laminas-test": "4.1.x-dev"
-    }
 }
